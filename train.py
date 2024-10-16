@@ -77,25 +77,6 @@ if args.visualize:
 metrics = {'train_loss': [], 'val_loss': []}
 constant_metrics = {'min_val_epoch': -1, 'min_val_loss': 1e10}
 
-class Classifier(torch.nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.linear1 = torch.nn.Linear(60, 32)
-        self.linear2 = torch.nn.Linear(32, 16)
-        self.linear3 = torch.nn.Linear(16, 8)
-        self.linear4 = torch.nn.Linear(8, 2)
-
-    def forward(self, x):
-        x = self.linear1(x)
-        x = torch.nn.functional.relu(x)
-        x = self.linear2(x)
-        x = torch.nn.functional.relu(x)
-        x = self.linear3(x)
-        x = torch.nn.functional.relu(x)
-        x = self.linear4(x)
-
-        return x
-
 def train(epoch):
     global metrics
     model.train()
